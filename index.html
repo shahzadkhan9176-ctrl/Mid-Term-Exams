@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quaid-e-Azam College | Hamid Campus, Fazilpur</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="college-logo">QAC</div>
+                <h1>Quaid-e-Azam College</h1>
+                <p>Hamid Campus, Fazilpur</p>
+            </div>
+            <div class="login-body">
+                <form id="login-form" onsubmit="return handleLogin(event)">
+                    <div class="form-group">
+                        <label for="student-name">Student Name</label>
+                        <input type="text" id="student-name" placeholder="Enter your full name" required autocomplete="off">
+                        <div class="error-msg" id="name-error">Please enter your name</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id-card">ID Card Number</label>
+                        <input type="text" id="id-card" placeholder="Enter your ID card number" required autocomplete="off">
+                        <div class="error-msg" id="id-error">Please enter a valid ID card number</div>
+                    </div>
+                    <button type="submit" class="login-btn">Enter Portal</button>
+                </form>
+            </div>
+            <div class="login-footer">
+                Student Examination Portal • Mid-Term 2025
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PORTAL SCREEN ==================== -->
+    <div id="portal-screen">
+        <div class="top-nav">
+            <div class="nav-left">
+                <div class="nav-logo">QAC</div>
+                <div class="nav-title">
+                    <h2>Quaid-e-Azam College</h2>
+                    <p>Hamid Campus, Fazilpur</p>
+                </div>
+            </div>
+            <div class="student-info">
+                <div class="name" id="display-name">Student Name</div>
+                <div>ID: <span id="display-id">00000</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="exam-card">
+                <div class="exam-header">
+                    <h1>Mid-Term Examination</h1>
+                    <div class="campus">Quaid-e-Azam College • Hamid Campus, Fazilpur</div>
+                    <div class="exam-meta">
+                        <span>📚 Course: <strong>Freelancing</strong></span>
+                        <span>👩‍🏫 Instructor: <strong>Mehak Razzaq</strong></span>
+                        <span>📝 Total Marks: <strong>20</strong></span>
+                        <span>⏱️ Time: <strong>20 Minutes</strong></span>
+                    </div>
+                </div>
+
+                <div class="exam-body">
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Choose the correct option. Each question carries 1 mark.
+                    </div>
+
+                    <form id="exam-form">
+                        <!-- Questions Q1 to Q20 (same as before) -->
+                        <div class="question">
+                            <div class="question-text">Q1. What is freelancing?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q1" value="A" id="q1a"><label for="q1a">A) Working only in an office</label></div>
+                                <div class="option"><input type="radio" name="q1" value="B" id="q1b"><label for="q1b">B) Working independently for clients</label></div>
+                                <div class="option"><input type="radio" name="q1" value="C" id="q1c"><label for="q1c">C) Working only in a school</label></div>
+                                <div class="option"><input type="radio" name="q1" value="D" id="q1d"><label for="q1d">D) Working without skills</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q2. Who is a freelancer?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q2" value="A" id="q2a"><label for="q2a">A) A person who works independently for clients</label></div>
+                                <div class="option"><input type="radio" name="q2" value="B" id="q2b"><label for="q2b">B) A school principal</label></div>
+                                <div class="option"><input type="radio" name="q2" value="C" id="q2c"><label for="q2c">C) A shopkeeper only</label></div>
+                                <div class="option"><input type="radio" name="q2" value="D" id="q2d"><label for="q2d">D) A government officer only</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q3. What is a client?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q3" value="A" id="q3a"><label for="q3a">A) A person who provides training only</label></div>
+                                <div class="option"><input type="radio" name="q3" value="B" id="q3b"><label for="q3b">B) A person who buys services</label></div>
+                                <div class="option"><input type="radio" name="q3" value="C" id="q3c"><label for="q3c">C) A person who creates software only</label></div>
+                                <div class="option"><input type="radio" name="q3" value="D" id="q3d"><label for="q3d">D) A person who teaches students</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q4. Which of the following is a freelancing platform?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q4" value="A" id="q4a"><label for="q4a">A) MS Paint</label></div>
+                                <div class="option"><input type="radio" name="q4" value="B" id="q4b"><label for="q4b">B) Notepad</label></div>
+                                <div class="option"><input type="radio" name="q4" value="C" id="q4c"><label for="q4c">C) Upwork</label></div>
+                                <div class="option"><input type="radio" name="q4" value="D" id="q4d"><label for="q4d">D) Calculator</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q5. What is a portfolio?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q5" value="A" id="q5a"><label for="q5a">A) A collection of work samples</label></div>
+                                <div class="option"><input type="radio" name="q5" value="B" id="q5b"><label for="q5b">B) A bank account</label></div>
+                                <div class="option"><input type="radio" name="q5" value="C" id="q5c"><label for="q5c">C) A social media password</label></div>
+                                <div class="option"><input type="radio" name="q5" value="D" id="q5d"><label for="q5d">D) A payment receipt</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q6. What is a proposal in freelancing?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q6" value="A" id="q6a"><label for="q6a">A) A job rejection</label></div>
+                                <div class="option"><input type="radio" name="q6" value="B" id="q6b"><label for="q6b">B) An offer explaining how you can complete a client's project</label></div>
+                                <div class="option"><input type="radio" name="q6" value="C" id="q6c"><label for="q6c">C) A personal photograph</label></div>
+                                <div class="option"><input type="radio" name="q6" value="D" id="q6d"><label for="q6d">D) A payment method</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q7. What is a gig?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q7" value="A" id="q7a"><label for="q7a">A) A type of computer</label></div>
+                                <div class="option"><input type="radio" name="q7" value="B" id="q7b"><label for="q7b">B) A freelancing service offered to clients</label></div>
+                                <div class="option"><input type="radio" name="q7" value="C" id="q7c"><label for="q7c">C) A bank card</label></div>
+                                <div class="option"><input type="radio" name="q7" value="D" id="q7d"><label for="q7d">D) A video player</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q8. What is client acquisition?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q8" value="A" id="q8a"><label for="q8a">A) Finding and attracting potential clients</label></div>
+                                <div class="option"><input type="radio" name="q8" value="B" id="q8b"><label for="q8b">B) Deleting a portfolio</label></div>
+                                <div class="option"><input type="radio" name="q8" value="C" id="q8c"><label for="q8c">C) Closing a bank account</label></div>
+                                <div class="option"><input type="radio" name="q8" value="D" id="q8d"><label for="q8d">D) Installing software</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q9. Which skill is useful for creating social media posts?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q9" value="A" id="q9a"><label for="q9a">A) Plumbing</label></div>
+                                <div class="option"><input type="radio" name="q9" value="B" id="q9b"><label for="q9b">B) Driving</label></div>
+                                <div class="option"><input type="radio" name="q9" value="C" id="q9c"><label for="q9c">C) Graphic Designing</label></div>
+                                <div class="option"><input type="radio" name="q9" value="D" id="q9d"><label for="q9d">D) Cooking only</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q10. What is the purpose of a professional profile?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q10" value="A" id="q10a"><label for="q10a">A) To show your skills and services</label></div>
+                                <div class="option"><input type="radio" name="q10" value="B" id="q10b"><label for="q10b">B) To share your password</label></div>
+                                <div class="option"><input type="radio" name="q10" value="C" id="q10c"><label for="q10c">C) To play games</label></div>
+                                <div class="option"><input type="radio" name="q10" value="D" id="q10d"><label for="q10d">D) To store music only</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q11. Which of the following is a content-writing task?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q11" value="A" id="q11a"><label for="q11a">A) Repairing a computer</label></div>
+                                <div class="option"><input type="radio" name="q11" value="B" id="q11b"><label for="q11b">B) Writing a blog post</label></div>
+                                <div class="option"><input type="radio" name="q11" value="C" id="q11c"><label for="q11c">C) Installing Windows</label></div>
+                                <div class="option"><input type="radio" name="q11" value="D" id="q11d"><label for="q11d">D) Connecting a printer</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q12. What does SEO stand for?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q12" value="A" id="q12a"><label for="q12a">A) Search Engine Optimization</label></div>
+                                <div class="option"><input type="radio" name="q12" value="B" id="q12b"><label for="q12b">B) Social Editing Option</label></div>
+                                <div class="option"><input type="radio" name="q12" value="C" id="q12c"><label for="q12c">C) Search Email Operation</label></div>
+                                <div class="option"><input type="radio" name="q12" value="D" id="q12d"><label for="q12d">D) System Entry Online</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q13. Why is communication important in freelancing?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q13" value="A" id="q13a"><label for="q13a">A) To confuse clients</label></div>
+                                <div class="option"><input type="radio" name="q13" value="B" id="q13b"><label for="q13b">B) To avoid deadlines</label></div>
+                                <div class="option"><input type="radio" name="q13" value="C" id="q13c"><label for="q13c">C) To understand client requirements</label></div>
+                                <div class="option"><input type="radio" name="q13" value="D" id="q13d"><label for="q13d">D) To increase mistakes</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q14. What should a freelancer do before accepting a project?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q14" value="A" id="q14a"><label for="q14a">A) Ignore the client's requirements</label></div>
+                                <div class="option"><input type="radio" name="q14" value="B" id="q14b"><label for="q14b">B) Understand the project requirements</label></div>
+                                <div class="option"><input type="radio" name="q14" value="C" id="q14c"><label for="q14c">C) Submit an empty file</label></div>
+                                <div class="option"><input type="radio" name="q14" value="D" id="q14d"><label for="q14d">D) Block the client</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q15. What is a deadline?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q15" value="A" id="q15a"><label for="q15a">A) The final date or time to complete a task</label></div>
+                                <div class="option"><input type="radio" name="q15" value="B" id="q15b"><label for="q15b">B) A payment account</label></div>
+                                <div class="option"><input type="radio" name="q15" value="C" id="q15c"><label for="q15c">C) A computer program</label></div>
+                                <div class="option"><input type="radio" name="q15" value="D" id="q15d"><label for="q15d">D) A portfolio design</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q16. Which of the following is an example of virtual assistance?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q16" value="A" id="q16a"><label for="q16a">A) Managing emails and appointments</label></div>
+                                <div class="option"><input type="radio" name="q16" value="B" id="q16b"><label for="q16b">B) Repairing roads</label></div>
+                                <div class="option"><input type="radio" name="q16" value="C" id="q16c"><label for="q16c">C) Building houses</label></div>
+                                <div class="option"><input type="radio" name="q16" value="D" id="q16d"><label for="q16d">D) Driving a bus</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q17. What should you do if a client requests changes to your work?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q17" value="A" id="q17a"><label for="q17a">A) Ignore the client</label></div>
+                                <div class="option"><input type="radio" name="q17" value="B" id="q17b"><label for="q17b">B) Respond professionally and discuss the changes</label></div>
+                                <div class="option"><input type="radio" name="q17" value="C" id="q17c"><label for="q17c">C) Delete your account</label></div>
+                                <div class="option"><input type="radio" name="q17" value="D" id="q17d"><label for="q17d">D) Stop communicating</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q18. What is the purpose of a cover letter?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q18" value="A" id="q18a"><label for="q18a">A) To introduce yourself and explain your suitability for a job</label></div>
+                                <div class="option"><input type="radio" name="q18" value="B" id="q18b"><label for="q18b">B) To share personal passwords</label></div>
+                                <div class="option"><input type="radio" name="q18" value="C" id="q18c"><label for="q18c">C) To make a payment</label></div>
+                                <div class="option"><input type="radio" name="q18" value="D" id="q18d"><label for="q18d">D) To download software</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q19. Which quality helps a freelancer build a good reputation?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q19" value="A" id="q19a"><label for="q19a">A) Missing deadlines</label></div>
+                                <div class="option"><input type="radio" name="q19" value="B" id="q19b"><label for="q19b">B) Ignoring messages</label></div>
+                                <div class="option"><input type="radio" name="q19" value="C" id="q19c"><label for="q19c">C) Delivering quality work on time</label></div>
+                                <div class="option"><input type="radio" name="q19" value="D" id="q19d"><label for="q19d">D) Making false promises</label></div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-text">Q20. What is the best way for a beginner to build a portfolio?</div>
+                            <div class="options">
+                                <div class="option"><input type="radio" name="q20" value="A" id="q20a"><label for="q20a">A) Copying another freelancer's work and claiming it as their own</label></div>
+                                <div class="option"><input type="radio" name="q20" value="B" id="q20b"><label for="q20b">B) Creating sample projects that demonstrate their skills</label></div>
+                                <div class="option"><input type="radio" name="q20" value="C" id="q20c"><label for="q20c">C) Waiting without practising</label></div>
+                                <div class="option"><input type="radio" name="q20" value="D" id="q20d"><label for="q20d">D) Using fake client reviews</label></div>
+                            </div>
+                        </div>
+
+                        <div class="submit-section">
+                            <button type="button" class="submit-btn" id="submit-btn" onclick="submitExam()">Submit Exam</button>
+                            <div class="result-box" id="result-box"></div>
+                            <div id="sending-status" style="margin-top:15px; font-size:14px; color:#555;"></div>
+                        </div>
+                    </form>
+
+                    <div class="best-luck">Best of Luck!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2025 Quaid-e-Azam College – Hamid Campus, Fazilpur | Student Examination Portal
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
